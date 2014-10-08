@@ -1,0 +1,48 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+body { margin: 0; }
+
+.columnsContainer, footer { position: relative; margin: .5em; margin-top: 0px;}
+
+.middleColumn {  border: 0px solid  #ccc; padding: 0.25em;  }
+
+.lastColumn_visible {  border: 0px solid  #ccc; padding: 0.25em;  }
+
+.portfolioColumn {  display:table-cell;  border: 0px solid  #ccc; padding: 0.25em;spacing: 1.25em; width: 330px; }
+
+.portfolioColumn1 {  display:table-cell;  border: 0px solid  #ccc; padding: 0.25em;spacing: 1.25em; width: 130px; }
+
+.leftColumn { margin-bottom: .5em;  }
+
+
+    .toggler { width: 500px; height: 200px; position: relative; }
+    #button { padding: .5em 1em; text-decoration: none; }
+    #effect { width: 240px; height: 135px; padding: 0.4em; position: relative; }
+    #effect h3 { margin: 0; padding: 0.4em; text-align: center; }
+    #task_container_1{ width: 70%; height: 200px; position: relative;background:red; }
+    .task_container_3{ width: 70%; height: 200px; position: relative;background:grey; }
+    .ui-effects-transfer { border: 2px dotted gray; }
+    
+    .task_container_class { font-size: 11px;spacing: 15px; background:grey;padding: 0.4em;}
+    
+    .comment_container_class { width: 80%; font-size: 12px;spacing: 15px; background:grey;padding: 0.4em;}
+    
+    .task_container_desc { color: #888; font-size: 11px; }
+
+
+
+@media screen and (min-width: 47.5em ) {
+  .middleColumn { margin-left: 11.5em; margin-right: 30%;}
+
+	.leftColumn {position: fixed; top: 40px; left: 30; width: 10.75em; }   
+	
+	.lastColumn_hidden {position: fixed; top: 190px; left: 70%; width: 29%; display: none;}  
+	.lastColumn_visible {position: fixed; top: 190px; left: 70%; width: 29%; display: block;}  
+	
+	.header { z-index: 100; position: fixed; background-color: #fff; border-bottom: 1px solid  #ccc;  opacity: 1; width: 100%;height: 121px;  }
+	
+	.filterContainer{ z-index: 100; top: 121px; position: fixed; background-color: #fff; border-bottom: 1px solid  #ccc;  opacity: 1; width: 100%; height: 40px;  }
+	
+}
