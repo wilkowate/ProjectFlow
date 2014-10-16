@@ -7,14 +7,17 @@
 
 	<style type="text/css" media="screen">
 		@import "css/style.css";
-		@import "//cdn.datatables.net/1.10.0/css/jquery.dataTables.css";
 		@import "//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css";
+
+		@import "//cdn.datatables.net/plug-ins/a5734b29083/integration/jqueryui/dataTables.jqueryui.css";
 	</style>
 
-  <script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-
+  <script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/plug-ins/a5734b29083/integration/jqueryui/dataTables.jqueryui.js"></script>
+  
 </head>
 
 <body>
@@ -31,9 +34,7 @@
 	  		<img src="img/icons/a8-logo.jpg" alt="" />
 	   	</div>
 	   	
-  		<div class="filterContainer">
-	  		
-	   	</div>
+
 	   	
   	<div class="columnsContainer">
 

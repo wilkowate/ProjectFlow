@@ -1,10 +1,7 @@
 <?php
-$method = $_POST ['method'];
+//$method = $_POST ['method'];
 require_once ('functions_PF.php');
 
-
-$method = $_POST ['method'];
-echo $method;
 
 if (isset ( $_POST ["method"] )) {
 	$method = $_POST ["method"];
@@ -12,6 +9,8 @@ if (isset ( $_POST ["method"] )) {
 		insert_task();
 	} else if ($method == "update_status") {
 		update_status();
+	} else if ($method == "select_tasks") {
+		select_tasks();
 	}
 }
 
@@ -86,6 +85,7 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 	
 
 	function getTaskDetails($taskId){
+		try {
 		$db = getDBConnection();
 		$sql = "SELECT * FROM `Tasks` WHERE id = ".$taskId;
 		$stmt = $db->prepare($sql);
@@ -96,6 +96,10 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 		$rows = $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		//for($i = 0; $i < count ( $rows ); $i ++) {
 		return $rows;
+		} catch ( PDOException $e ) {
+			echo '{"error":{"text":' . $e->getMessage () . '}}';
+			
+		}
 	}
 	
 	////////////////////////////////////////////////// METHODS FOR /////////////////
@@ -185,6 +189,47 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 			echo '{"error":{"text":' . $e->getMessage () . '}}';
 		}
 	}
+	
+	function select_tasks(){
+		$arr = array();
+		//$uzytkownik_id=$_SESSION['uzytkownik_id'];
+		$sql = 'SELECT * FROM `Tasks` WHERE `id` <> -1 ';
+		
+		if(isset($_POST['person_id']))
+			$sql .= ' AND person_id = '.$_POST['person_id'];
+		
+		$sql .= ' ORDER BY `project_A8id` ';
+		
+		//echo $sql;
+		try {
+			$db = getDBConnection();
+			$stmt = $db->prepare ( $sql );
+			//$stmt->bindParam ( ":task_id", $task_id);
+			//$stmt->bindParam ( ":status_id", $status_id);
+			$stmt->execute();
+			$rows = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+			for($i = 0; $i < count ( $rows ); $i ++) {
+				$arr[$i]['task'] = $rows [$i] ['task'];
+				$arr[$i]['id'] = $rows [$i] ['id'];
+				$arr[$i]['project_A8id'] = $rows [$i] ['project_A8id'];
+				$arr[$i]['assign_date'] = $rows [$i] ['assign_date'];
+				
+				
+				//$arr[]['opis_z_faktury'] = $rows [0] ['opis_z_fakury'];
+				//$arr[]['ilosc_produktow'] = count($rows);
+			}
+			
+			//var_dump($arr);
+			//echo json_encode ( $arr );
+			$db = null;
+			//dodajZdarzenie(59, 'Usunięty protokół o id: '.$protokol_id, $uzytkownik_id);
+			//$arr['protokol_id'] = $sql;
+			echo json_encode ( $arr );
+		} catch ( PDOException $e ) {
+			echo '{"error":{"text":' . $e->getMessage () . '}}';
+		}
+	}
+	
 	
 	
 
