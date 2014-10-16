@@ -16,7 +16,7 @@ body { margin: 0; }
 
 .leftColumn { margin-bottom: .5em;  }
 
-.filterButton { padding: 0.25em; }
+.filterButton { vertical-align:middle; padding: 0.25em; }
 
 
     .toggler { width: 500px; height: 200px; position: relative; }
@@ -33,7 +33,7 @@ body { margin: 0; }
     
     .task_container_desc { color: #888; font-size: 11px; }
 
-
+ 	.task_container_task { color: #000; font-size: 15px; }
 
 @media screen and (min-width: 47.5em ) {
   .middleColumn { margin-left: 11.5em; margin-right: 30%;}

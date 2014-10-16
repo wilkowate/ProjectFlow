@@ -136,7 +136,7 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 		if($task_id>0)
 			$sql = 'UPDATE `Tasks` SET `task`=:task WHERE `id` = :id;';//,project_A8id=,person_id) values(,:project_A8id,:person_id)';
 		else 
-			$sql = 'INSERT INTO `Tasks` (`task`,`project_A8id`,`person_id`) values(:task,:project_A8id,:person_id)';
+			$sql = 'INSERT INTO `Tasks` (`task`,`project_A8id`,`person_id`,`status_id`) values(:task,:project_A8id,:person_id,3)';
 		
 		echo $sql.'   '.$task_id;
 		
@@ -198,6 +198,19 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 		if(isset($_POST['person_id']))
 			$sql .= ' AND person_id = '.$_POST['person_id'];
 		
+		//status
+		$sql .= ' AND (status_id = 3';
+		
+		if(isset($_POST['status_urgent'])&&$_POST['status_urgent']==1)
+			$sql .= ' OR status_id =  '.URGENT;
+		if(isset($_POST['status_inactive'])&&$_POST['status_inactive']==1)
+			$sql .= ' OR status_id = '.INACTIVE;
+		if(isset($_POST['status_done'])&&$_POST['status_done']==1)
+			$sql .= ' OR status_id = ' .DONE;
+		
+		$sql .= ')';
+		//end status
+		
 		$sql .= ' ORDER BY `project_A8id` ';
 		
 		//echo $sql;
@@ -213,17 +226,10 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 				$arr[$i]['id'] = $rows [$i] ['id'];
 				$arr[$i]['project_A8id'] = $rows [$i] ['project_A8id'];
 				$arr[$i]['assign_date'] = $rows [$i] ['assign_date'];
-				
-				
-				//$arr[]['opis_z_faktury'] = $rows [0] ['opis_z_fakury'];
-				//$arr[]['ilosc_produktow'] = count($rows);
+				$arr[$i]['status_id'] = $rows [$i] ['status_id'];
 			}
-			
 			//var_dump($arr);
-			//echo json_encode ( $arr );
 			$db = null;
-			//dodajZdarzenie(59, 'Usunięty protokół o id: '.$protokol_id, $uzytkownik_id);
-			//$arr['protokol_id'] = $sql;
 			echo json_encode ( $arr );
 		} catch ( PDOException $e ) {
 			echo '{"error":{"text":' . $e->getMessage () . '}}';

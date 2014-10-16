@@ -34,7 +34,7 @@ $( document ).ready(function() {
 });
 
 function save_task(){
-	//alert ('save task '+project_A8id);
+	//alert ('save task '+$("#task").val()+" "+task_id);
 	   var data_array = { method: 'insert_task',project_A8id: project_A8id, person_id: 2 };
 	   data_array['task'] = $("#task").val();
 	   data_array['task_id'] = task_id;
@@ -70,18 +70,18 @@ function change_status(status_id){
 	
 	<h2 id = "e1">Zadanie</h2>
 	
-	<img title="Oznacz jako zrobione." width="16px" onclick="javascript:change_status(1);" src="img/icons/tick.png"/>
-	<img title="Oznacz jako pilne." width="16px" onclick="javascript:change_status(2);" src="img/icons/fire.png"/>
-	<img title="Oznacz jako nieaktywne." width="16px" onclick="javascript:change_status(3);" src="img/icons/water.png"/>
-	
-	Treść zadania: <br>
-	<input id = "task" size="55" ></input>
+	<img class="filterButton ui-widget-content ui-corner-all" title="Oznacz jako zrobione."  onclick="javascript:change_status(1);" src="img/icons/set-status-done.png"/>
+	<img class="filterButton ui-widget-content ui-corner-all" title="Oznacz jako pilne."  onclick="javascript:change_status(2);" src="img/icons/set-status-urgent.png"/>
+	<img class="filterButton ui-widget-content ui-corner-all" title="Oznacz jako nieaktywne." onclick="javascript:change_status(3);" src="img/icons/set-status-inactive.png"/>
+	<br><br>
+	Treść zadania: <br><br>
+	<textarea rows="4" cols="50" id = "task" size="55" ></textarea>
 	
 
-	<img title="Zapisz" width="16px" onclick="javascript:save_task();" src="img/icons/tick.png"/>
+	Zapisz:<img title="Zapisz" width="16px" onclick="javascript:save_task();" src="img/icons/tick.png"/>
 	<br>
 
-<hr>
+
 <!-- <div> -->
 <!-- Komentarze: -->
 <!-- <br> -->
