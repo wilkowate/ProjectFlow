@@ -201,7 +201,7 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 		//status
 		$sql .= ' AND (status_id = 3';
 		
-		if(isset($_POST['status_urgent'])&&$_POST['status_urgent']==1)
+		//if(isset($_POST['status_urgent'])&&$_POST['status_urgent']==1)
 			$sql .= ' OR status_id =  '.URGENT;
 		if(isset($_POST['status_inactive'])&&$_POST['status_inactive']==1)
 			$sql .= ' OR status_id = '.INACTIVE;

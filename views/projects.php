@@ -6,20 +6,18 @@ if ($_POST) {
 	exit ();
 }
 
+$rows_persons = getPersons();
+
 ?>
 
 <script type="text/javascript">
-
-function dodajFakture(){
-	window.location.replace('index.php?pg=acceptance_of_goods');
-}
 
 $(document).ready( function () {
 
 	// --------------------------------------- main list of orders table ----------------------------------------------------
 	function createTable(){
 		
-		$('#list_of_invoices').dataTable( {
+		$('#list_of_projects').dataTable( {
 			"bDestroy": true,
 			"bProcessing": true,
 			"bServerSide": true,
@@ -32,12 +30,13 @@ $(document).ready( function () {
 	                         { "sTitle": "Portfolio ", "aTargets": [4],"sWidth":"10px"},
 	                         { "sTitle": "Edycja", "aTargets": [5],"sWidth":"10px"}
 	                  ],
-			"sAjaxSource": "controlers/datatables/projects_dt.php",		
+			"sAjaxSource": "processors/datatables/projects_dt.php",		
 			"drawCallback": function( settings ) {
 
 	            $('.popup_edycja').click(function(){
 	                id = $(this).attr('id');
 	               // alert('id '+id);
+	                $( "#dialog-edit-person" ).dialog( "open" );
 	            });
 
 	            $('.popup_usun').click(function(){
@@ -48,8 +47,47 @@ $(document).ready( function () {
 	       }
 		} );
 	}
-	//--------------------------------------- END main list of orders table ----------------------------------------------------
 
+	$( "#dialog-edit-person" ).dialog({
+	    autoOpen: false,
+	    height: 350,
+	    width: 350,
+	    modal: true,
+	    buttons: {
+	      "Ok": function() {
+
+	        var bValid = true;
+	        //bValid = bValid && validateNumber(ilosc.val());
+	        
+	        if ( bValid ) {
+	        	var data_array = { method: 'update_person' };
+	  			data_array['person'] = $("#person").val();
+	 		
+	       	 	$.ajax({
+	       			type: 'post',
+	       			url: "../lib/functions_projects.php",
+	       			data: data_array ,
+	       			dataType: 'json', // Set the data type so jQuery can parse it for you
+	       			success: function( data ) {
+	       				wyczyscFiltr();
+	       				createTable();
+	      	 		}
+	       		});
+	          $( this ).dialog( "close" );
+	        }
+	        
+	      },
+	      "Cancel": function() {
+	        $( this ).dialog( "close" );
+	      }
+	    },
+	    
+	    close: function() {
+	      //allFields.val( "" ).removeClass( "ui-state-error" );
+	    }
+	  });
+	  
+	//--------------------------------------- END main list of orders table ----------------------------------------------------
 		createTable();
 
 });
@@ -57,14 +95,27 @@ $(document).ready( function () {
 </script>
 
 <div>
-<table id="list_of_invoices">
+<table id="list_of_projects">
 	<thead>
 		<tr>
 			<th></th>			<th></th>			<th></th>
 			<th></th>			<th></th>			<th></th>	
-								
 		</tr>
-
 	</thead>
 </table>
+</div>
+
+<div id="dialog-edit-person" title="Przyporządkuj osobę do projektu.">
+	<form>
+		<fieldset>
+		<label for="person">Osoba</label> 
+		<select style="width:200px" id="person" name="person" >
+					<?php 
+					echo " <option value='0'> brak </option> ";
+					for ($j = 0; $j < count ($rows_persons); $j++) {
+						echo " <option value='" . $rows_persons[$j]['id']  . "'> " . $rows_persons[$j]['person_name']  . " </option> ";
+					}?>
+			</select>
+		</fieldset>
+	</form>
 </div>

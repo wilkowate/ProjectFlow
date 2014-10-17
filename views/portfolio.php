@@ -9,21 +9,28 @@ if ($_POST) {
 	exit ();
 }
 
+$priority = (isset($_GET['priority']) ? $_GET['priority'] : 1);
+
 ?>
 
 <script type="text/javascript">
 
-
 $(document).ready( function () {
-
 
 });
 
 </script>
+    <div class="filterContainer">
+	  	&nbsp;&nbsp;&nbsp; priorytet prezentacji:&nbsp;&nbsp;&nbsp;
+	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:window.location.replace('index.php?pg=portfolio&priority=1');" src="img/icons/set-status-inactive.png"/>
+	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:window.location.replace('index.php?pg=portfolio&priority=3');" src="img/icons/set-status-todo.png"/>
+	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:window.location.replace('index.php?pg=portfolio&priority=5');" src="img/icons/set-status-urgent.png"/>
+	</div>
 
 <?php
 
-$rows = getPortfolioProjectA8Ids();
+
+$rows = getPortfolioProjectA8Ids($priority);
 
 	for ($j = 0; $j < count ($rows); $j++) {
 
@@ -33,7 +40,7 @@ $rows = getPortfolioProjectA8Ids();
 		
 
 		
-		echo '<hr>';
+		echo '<br><hr>';
 		echo " <div  class=\"columnsContainer\"> <h1>" . $rows[$j]['project_A8id'] . " </h1> " ;
 		
 		$rows_portfolio = getPortfolioForProjectId($project_A8id);

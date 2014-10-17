@@ -66,11 +66,11 @@ function getPortfolioForProjectId($project_A8id){
 	}
 	
 	
-	function getPortfolioProjectA8Ids(){
+	function getPortfolioProjectA8Ids($priority){
 		$db = getDBConnection();
-		$sql = "SELECT distinct `project_A8id` FROM `Projects_portfolio`";
-		//$sql .=" INNER JOIN  `Projects_portfolio` on `Projects`.`project_id`=`Projects_portfolio`.`project_id`";
-		//$sql .=" WHERE `portfolio_flag` = 1";
+		$sql = "SELECT distinct `Projects_portfolio`.`project_A8id` FROM `Projects_portfolio`  ";
+		$sql .=" INNER JOIN  `Projects` on `Projects`.`project_A8id`=`Projects_portfolio`.`project_A8id`";
+		$sql .=" WHERE presentation_priority >= ".$priority;
 		$stmt = $db->prepare($sql);
 	
 		//echo $sql;

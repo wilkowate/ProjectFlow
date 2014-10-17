@@ -3,8 +3,6 @@ require_once ('processors/functions_PF.php');
 require_once ('processors/functions_tasks.php');
 
 
-
-
 $dir = 'Public/Projekty/!Projekty';
 
 if ($_POST) {
@@ -47,15 +45,9 @@ $tasks_rows = getTasksForPerson($person_id);
         }
 
 
-		  
 //A $( document ).ready() block.
   $( document ).ready(function() {
       console.log( "ready!" );
-
-
-
-
-
 
 	    $( ".olae" ).click(function() {
 			var task_id = $(this).attr( 'task_id' );
@@ -102,8 +94,6 @@ $tasks_rows = getTasksForPerson($person_id);
         $( "#effect" ).removeAttr( "style" ).hide().fadeIn();
       }, 1000 );
     };
-
-
  
     // set effect from select menu value
     $( "#button" ).click(function() {
@@ -205,7 +195,6 @@ $tasks_rows = getTasksForPerson($person_id);
     
     Pokaż też zadania o statusie: &nbsp;&nbsp;&nbsp;
 	<span class="filterButton ui-widget-content ui-corner-all">
-			<input type="checkbox" id="status_urgent_chk" name="status_urgent_chk" onclick="javascript:refreshTasks();">Pilny
 			<input type="checkbox" id="status_done_chk" name="status_done_chk" onclick="javascript:refreshTasks();">Zrobiony
 			<input type="checkbox" id="status_inactive_chk" name="status_inactive_chk" onclick="javascript:refreshTasks();">Nieaktywny
 	</span>
@@ -219,17 +208,13 @@ $tasks_rows = getTasksForPerson($person_id);
 	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '2');person_id=2;" src="img/icons/person2.png"/>
 	</div>
 
-
  
 <div id="accordion">
-
 
 </div>
 
 
-
 <script type="text/javascript">
-  
 
 $(document).ajaxComplete(function() {
 

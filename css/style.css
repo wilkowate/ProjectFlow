@@ -4,7 +4,7 @@
 
 body { margin: 0; }
 
-.columnsContainer, footer { position: relative; margin: .5em; margin-top: 0px;}
+.columnsContainer, footer { top: 20px; position: relative; margin: .5em; margin-top: 0px;}
 
 .middleColumn {  border: 0px solid  #ccc; padding: 0.25em;  }
 
@@ -45,6 +45,6 @@ body { margin: 0; }
 	
 	.header { z-index: 100; position: fixed; background-color: #fff; border-bottom: 1px solid  #ccc;  opacity: 1; width: 100%;height: 121px;  }
 	
-	.filterContainer{ z-index: 100; top: 121px; position: fixed; background-color: #fff; padding: 0.25em;  opacity: 1; width: 100%; height: 40px;  }
+	.filterContainer{ z-index: 100; top: 121px; position: fixed; background-color: #fff; padding: 0.25em;  opacity: 1; width: 100%; height: 50px;border-bottom: 1px solid  #ccc;  }
 	
 }
