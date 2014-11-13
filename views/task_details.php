@@ -23,6 +23,7 @@ var project_A8id = <?php echo (isset($_GET['project_A8id']) ? ''.$_GET['project_
 function close_div(){
 		//alert ('close_div close_div '+task_id);
 		 $(".lastColumn_hidden").removeClass( "lastColumn_visible" );
+		 $(".middleColumn").removeClass( "middleColumn_part" );
 }
 
 $( document ).ready(function() {

@@ -70,6 +70,7 @@ function getPortfolioForProjectId($project_A8id){
 		$db = getDBConnection();
 		$sql = "SELECT distinct `Projects_portfolio`.`project_A8id` FROM `Projects_portfolio`  ";
 		$sql .=" INNER JOIN  `Projects` on `Projects`.`project_A8id`=`Projects_portfolio`.`project_A8id`";
+		if($priority>-1)
 		$sql .=" WHERE presentation_priority >= ".$priority;
 		$stmt = $db->prepare($sql);
 	

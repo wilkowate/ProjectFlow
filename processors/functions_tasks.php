@@ -193,7 +193,10 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 	function select_tasks(){
 		$arr = array();
 		//$uzytkownik_id=$_SESSION['uzytkownik_id'];
-		$sql = 'SELECT * FROM `Tasks` WHERE `id` <> -1 ';
+		$sql = 'SELECT * FROM `Tasks` ';
+		
+		$sql .=' INNER JOIN `Projects` ON `Tasks`.`project_A8id` = `Projects`.`project_A8id`';
+		$sql .= ' WHERE `id` <> -1 ';
 		
 		if(isset($_POST['person_id']))
 			$sql .= ' AND person_id = '.$_POST['person_id'];
@@ -211,7 +214,7 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 		$sql .= ')';
 		//end status
 		
-		$sql .= ' ORDER BY `project_A8id` ';
+		$sql .= ' ORDER BY `Tasks`.`project_A8id` ';
 		
 		//echo $sql;
 		try {
@@ -227,6 +230,7 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 				$arr[$i]['project_A8id'] = $rows [$i] ['project_A8id'];
 				$arr[$i]['assign_date'] = $rows [$i] ['assign_date'];
 				$arr[$i]['status_id'] = $rows [$i] ['status_id'];
+				$arr[$i]['project_name'] = $rows [$i] ['project_name'];
 			}
 			//var_dump($arr);
 			$db = null;
@@ -236,6 +240,3 @@ function getProjectA8IdsWithTasksForPersonId($personId){
 		}
 	}
 	
-	
-	
-

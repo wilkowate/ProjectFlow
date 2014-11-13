@@ -159,11 +159,17 @@ try {
 	
 	//echo $width.'<br>';
 
-	// calculate thumbnail size
-	$new_width = $thumbWidth;
-	$new_height = floor( $height * ( $thumbWidth / $width ) );
 
+	if($width > $height){
+		$new_width = $thumbWidth;
+		$new_height = floor( $height * ( $thumbWidth / $width ) );
+	} else {
+		$new_height  = $thumbWidth;
+		$new_width = floor( $width * ( $thumbWidth / $height ) );
+	}
 
+	echo $new_width.'-----'.$new_height.' new:';echo $width.'-----'.$height.'<br>';
+	
 	// create a new temporary image
 	$tmp_img = imagecreatetruecolor( $new_width, $new_height );
 
@@ -227,6 +233,8 @@ function truncateTables(){
 		$sql = "TRUNCATE TABLE  `Projects_portfolio`";
 		$stmt = $db->prepare ( $sql );
 		$stmt->execute();
+		
+		insertProject(0, 'Zadania Oli','','0000');
 		
 		$db = null;
 

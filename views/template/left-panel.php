@@ -43,28 +43,28 @@ if( retVal == true ){
 
  <br>  <br>  <br>  <br>  <br> <br> <br> 
 
-<div class="page">
+<div >
 		<input type="button" value="Portfolio" onclick="window.location.replace('index.php?pg=portfolio');" />
 </div>
 <br>
 
-<div class="page">
+<div >
 		<input type="button" value="Projekty" onclick="window.location.replace('index.php?pg=projects');" />
 </div>
 <br>
-<div class="page">
+<div >
 		<input type="button" value="Kontakty" onclick="window.location.replace('index.php?pg=contacts');" />
 </div>
 
 <br>
 
-<div class="page">
+<div >
 		<input type="button" value="Zadania" onclick="window.location.replace('index.php?pg=tasks');" />
 </div>
 
 <br>
 
-<div class="page">
+<div >
 		<input type="button" value="Uwagi do PF" onclick="window.location.replace('index.php?pg=pf_comments');" />
 </div>
 

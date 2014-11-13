@@ -34,6 +34,31 @@ $tasks_rows = getTasksForPerson($person_id);
 			});
 	}
 
+    function Print()
+    {
+        var mywindow = window.open('', 'print div', 'scrollbars=1');
+        mywindow.document.write('<html><head><title>zadania</title>');
+       
+        /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+        
+        mywindow.document.write('<style>.noprint  {   display: none !important;    }</style>');
+        
+        mywindow.document.write('<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" type="text/css" />');
+        //mywindow.document.write('<link rel="stylesheet" href="css/style.css" type="text/css" />');
+
+        mywindow.document.write('<link rel="stylesheet" type="text/css" media="print" href="css/styleprint.css" />');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write('<div class="page" > <div class="subpage">');
+
+        $('.printdiv').each(function(index, value){
+            mywindow.document.write($(this).html());
+        });
+        
+        mywindow.document.write('</div></div>');
+        mywindow.document.write('</body></html>');
+        mywindow.print();
+    }
+
   function new_taskG001_button(){
 	  var project_A8id = '"DlaOli"';//+$(this).attr( 'project_A8id' )+'"';
       //  alert('task_container'+task_id);
@@ -146,8 +171,9 @@ $tasks_rows = getTasksForPerson($person_id);
 						if(lastProjectA8Id!=0)
 							html += " </div> ";	
 								
-						html += '<h3>'+data[i]['project_A8id']+'</h3>';
-						html += " <div> ";
+						
+						html += " <div class='printdiv'> ";
+						html += '<h3>'+data[i]['project_name']+'</h3>';
 						html += '<button project_A8id="'+data[i]['project_A8id']+'" id="new_task_button" class="new_task_button"  ><img src="img/icons/plus-button.png" /></button>';
 						html += '<br><br>';
 						lastProjectA8Id=data[i]['project_A8id']
@@ -160,16 +186,18 @@ $tasks_rows = getTasksForPerson($person_id);
 						color = '#FFFF99';
 					if(data[i]['status_id']==<?php echo INACTIVE?>)
 						color = '#E6E6E6';
+
+					//html += '<br>';
 					
-					html += '<div style="background:'+color+';" task_id="'+data[i]['id']+'" class="task_container_class ui-widget-content ui-corner-all">';
+					html += '<div  style="background:'+color+';" task_id="'+data[i]['id']+'" class="task_container_class ui-widget-content ui-corner-all">';
 					
 					html += '<img class="filterButton" src="img/icons/person'+person_id+'.png"/>';
 					//html +='<span id="extend" task_id="'+data[i]['id']+'" class=" task_container_desc ">['+data[i]["assign_date"]+']  </span>';
 
 					//echo'<span id="extend" task_id="'.$rows[$i]['id'].'" class=" ui-icon ui-icon-circlesmall-plus"></span>';
-					html += '&nbsp;<span  class=" task_container_task ">'+data[i]["task"]+'  </span>' ;
+					html += '&nbsp;<span class=" task_container_task ">'+data[i]["task"]+'  </span>' ;
 
-					html += " <span  style=\"float:right;\" > ";
+					html += " <span class=\"noprint\" style=\"float:right;\" > ";
 						
 					html += '<img class="filterButton ui-widget-content ui-corner-all" title="Oznacz jako zrobione."  onclick="javascript:change_status(5,'+data[i]['id']+');" src="img/icons/set-status-done.png"/>';
 					html += '&nbsp;<span class=" task_container_desc ">['+data[i]["assign_date"]+']  </span>';
@@ -213,6 +241,11 @@ $tasks_rows = getTasksForPerson($person_id);
 
 </div>
 
+<div >
+
+		<input type="button" value=" drukuj " onclick="Print()" />
+</div>
+
 
 <script type="text/javascript">
 
@@ -223,6 +256,7 @@ $(document).ajaxComplete(function() {
 	  //alert('task_container'+project_A8id);
 	  $(".lastColumn_hidden").addClass( "lastColumn_visible" );
 	  $(".lastColumn_hidden").load("views/task_details.php?"+ $.param({project_A8id: project_A8id,task_id:-1}));
+		$(".middleColumn").addClass( "middleColumn_part" );
     });
 	
 	$( ".task_container_class" ).click(function() {
@@ -230,8 +264,9 @@ $(document).ajaxComplete(function() {
 	     // alert('task_container'+task_id);
 	      $(".lastColumn_hidden").addClass( "lastColumn_visible" );
 	      $(".lastColumn_hidden").load("views/task_details.php?"	  + $.param({    task_id: task_id}));
+	      $(".middleColumn").addClass( "middleColumn_part" );
 	});
 	  //$('a').address(); //simply rebind missing links
-	});
+});
 
 </script>
