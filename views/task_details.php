@@ -18,6 +18,7 @@ require_once ('../processors/functions_tasks.php');
 <script>
 var task_id = <?php echo (isset($_GET['task_id']) ? $_GET['task_id'] : -1);?>;
 var project_A8id = <?php echo (isset($_GET['project_A8id']) ? ''.$_GET['project_A8id'] : '-1');?>;
+var person_id = <?php echo (isset($_GET['person_id']) ? ''.$_GET['person_id'] : '2');?>;
 //var project_A8id = 'A240';
 
 function close_div(){
@@ -36,7 +37,7 @@ $( document ).ready(function() {
 
 function save_task(){
 	//alert ('save task '+$("#task").val()+" "+task_id);
-	   var data_array = { method: 'insert_task',project_A8id: project_A8id, person_id: 2 };
+	   var data_array = { method: 'insert_task',project_A8id: project_A8id, person_id: person_id };
 	   data_array['task'] = $("#task").val();
 	   data_array['task_id'] = task_id;
 		$.ajax({
@@ -45,8 +46,7 @@ function save_task(){
 			  data: data_array ,
 			  //dataType: 'json', // Set the data type so jQuery can parse it for you
 			   success: function( data ) {
-				   window.location.reload(); 
-					 //document.getElementById("produkty_tabela").innerHTML=data;
+				   window.location.replace('index.php?pg=tasks&person_id='+person_id);
 			  }
 		});
 }
@@ -79,7 +79,8 @@ function change_status(status_id){
 	<textarea rows="4" cols="50" id = "task" size="55" ></textarea>
 	
 
-	Zapisz:<img title="Zapisz" width="16px" onclick="javascript:save_task();" src="img/icons/tick.png"/>
+<br>
+	<button  onclick="javascript:save_task();" class="new_task_button"  >Zapisz</button>
 	<br>
 
 

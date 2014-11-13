@@ -70,20 +70,10 @@ $tasks_rows = getTasksForPerson($person_id);
         }
 
 
-//A $( document ).ready() block.
   $( document ).ready(function() {
       console.log( "ready!" );
 
-	    $( ".olae" ).click(function() {
-			var task_id = $(this).attr( 'task_id' );
-	        alert('extend'+task_id);
-	    	//$("[href$='.jpg']").
-	    	$("#task_container[task_id='"+task_id+"']").addClass( "task_container_3" );
-	    	//$("#task_container[task_id$='1']").addClass( "task_container_1" );
-	    });
-
-	    //person_id=2;
-	    loadTasksForFilter('person_id', '2');
+    loadTasksForFilter('person_id', person_id);
   	    
 	});
 
@@ -255,7 +245,7 @@ $(document).ajaxComplete(function() {
   	  var project_A8id = '"'+$(this).attr( 'project_A8id' )+'"';
 	  //alert('task_container'+project_A8id);
 	  $(".lastColumn_hidden").addClass( "lastColumn_visible" );
-	  $(".lastColumn_hidden").load("views/task_details.php?"+ $.param({project_A8id: project_A8id,task_id:-1}));
+	  $(".lastColumn_hidden").load("views/task_details.php?"+ $.param({project_A8id: project_A8id,task_id:-1,person_id: person_id}));
 		$(".middleColumn").addClass( "middleColumn_part" );
     });
 	
@@ -263,7 +253,7 @@ $(document).ajaxComplete(function() {
 		  var task_id = $(this).attr( 'task_id' );
 	     // alert('task_container'+task_id);
 	      $(".lastColumn_hidden").addClass( "lastColumn_visible" );
-	      $(".lastColumn_hidden").load("views/task_details.php?"	  + $.param({    task_id: task_id}));
+	      $(".lastColumn_hidden").load("views/task_details.php?"	  + $.param({ task_id: task_id,person_id: person_id}));
 	      $(".middleColumn").addClass( "middleColumn_part" );
 	});
 	  //$('a').address(); //simply rebind missing links
