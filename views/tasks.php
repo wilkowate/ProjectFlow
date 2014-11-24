@@ -71,7 +71,7 @@ $tasks_rows = getTasksForPerson($person_id);
 
 
   $( document ).ready(function() {
-      console.log( "ready!" );
+      console.log( "tasks.php document ready!" );
 
     loadTasksForFilter('person_id', person_id);
   	    
@@ -163,7 +163,7 @@ $tasks_rows = getTasksForPerson($person_id);
 								
 						
 						html += " <div class='printdiv'> ";
-						html += '<h3>'+data[i]['project_name']+'</h3>';
+						html += '<h3>'+data[i]['project_A8id']+"   "+data[i]['project_name']+'</h3>';
 						html += '<button project_A8id="'+data[i]['project_A8id']+'" id="new_task_button" class="new_task_button"  ><img src="img/icons/plus-button.png" /></button>';
 						html += '<br><br>';
 						lastProjectA8Id=data[i]['project_A8id']
@@ -185,7 +185,7 @@ $tasks_rows = getTasksForPerson($person_id);
 					//html +='<span id="extend" task_id="'+data[i]['id']+'" class=" task_container_desc ">['+data[i]["assign_date"]+']  </span>';
 
 					//echo'<span id="extend" task_id="'.$rows[$i]['id'].'" class=" ui-icon ui-icon-circlesmall-plus"></span>';
-					html += '&nbsp;<span class=" task_container_task ">'+data[i]["task"]+'  </span>' ;
+					html += '&nbsp;<span class=" task_container_task " task_id='+ data[i]["id"]+'>'+data[i]["task"]+'  </span>' ;
 
 					html += " <span class=\"noprint\" style=\"float:right;\" > ";
 						
@@ -249,7 +249,7 @@ $(document).ajaxComplete(function() {
 		$(".middleColumn").addClass( "middleColumn_part" );
     });
 	
-	$( ".task_container_class" ).click(function() {
+	$( ".task_container_task" ).click(function() {
 		  var task_id = $(this).attr( 'task_id' );
 	     // alert('task_container'+task_id);
 	      $(".lastColumn_hidden").addClass( "lastColumn_visible" );

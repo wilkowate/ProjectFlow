@@ -5,7 +5,7 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<style type="text/css" media="screen">
+	<style type="text/css" >
 		@import "css/style.css";
 		@import "//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css";
 
