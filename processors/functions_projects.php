@@ -1,5 +1,10 @@
 <?php
 
+error_reporting(E_ALL);
+// I don't know if you need to wrap the 1 inside of double quotes.
+ini_set("display_startup_errors",1);
+ini_set("display_errors",1);
+
 require_once ('processors/functions_PF.php');
 
 
@@ -67,6 +72,7 @@ function getPortfolioForProjectId($project_A8id){
 	
 	
 	function getPortfolioProjectA8Ids($priority){
+		try{
 		$db = getDBConnection();
 		$sql = "SELECT distinct `Projects_portfolio`.`project_A8id` FROM `Projects_portfolio`  ";
 		$sql .=" INNER JOIN  `Projects` on `Projects`.`project_A8id`=`Projects_portfolio`.`project_A8id`";
@@ -81,5 +87,8 @@ function getPortfolioForProjectId($project_A8id){
 		$rows = $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		//for($i = 0; $i < count ( $rows ); $i ++) {
 		return $rows;// [0] ['translator_id'];
+		} catch (Exception $e) {
+			echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
 	}
 
