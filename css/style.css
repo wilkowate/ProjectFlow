@@ -31,7 +31,7 @@ body { margin: 0; }
     
     .task_container_class { margin: 5px; font-size: 11px;spacing: 15px; background:grey;padding: 0.4em;}
     
-    .comment_container_class { width: 80%; font-size: 12px;spacing: 15px; background:grey;padding: 0.4em;}
+    .comment_container_class { width: 80%; font-size: 12px;spacing: 15px; background:grey;padding: 0.4em;margin-top:5px;}
     
     .task_container_desc { color: #888; font-size: 11px; }
 

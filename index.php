@@ -23,6 +23,7 @@
 <body>
 
 <?php
+session_start();
 //include ('lib/db.php');
 //include 'views/template/header.php';
 ?>
@@ -30,16 +31,18 @@
 
   <body>
    
-  		<div class="header">
-	  		<img src="img/icons/a8-logo.jpg" alt="" />
-	   	</div>
-	   	
-
+	<div class="header">
+  		<img src="img/icons/a8-logo.jpg" alt="" align="left"/> 
+  		<?php 
+  		if(($_SESSION['loggedin'])== true){ 
+			echo 'Login: '.$_SESSION['person_name'].'<br><a href="processors/logout.php">Wyloguj się</a>';
+		}?> 
+   	</div>
 	   	
   	<div class="columnsContainer">
 
 	  	<div class="leftColumn">
-	  		<?php include "views/template/left-panel.php"?>
+	  		<?php if(($_SESSION['loggedin'])== true){ include "views/template/left-panel.php";}?>
 	  	</div>
 	  	
 	  	<div class="middleColumn">
@@ -52,16 +55,19 @@
 if (isset($_REQUEST['pg'])){
 	$action = $_REQUEST['pg'];
 }
-else {$action='welcome_page';}
+else {$action='login_form';}
 //echo $action;
 $file = "views/$action.php";
-//if((($_SESSION['zalogowany'])== true)||($action=='logowanie')){
+if((($_SESSION['loggedin'])== true)||($action=='logowanie')){
 	if (file_exists($file)) {
 		include "$file";
 	}else{
 	echo '<div class="brakStrony">Podana strona nie istnieje!!!</div>';
 	}
-//}//include 'lib/footer.php'?>        
+}
+else include "views/login_form.php";
+
+//include 'lib/footer.php'?>        
 
   	</div>
   	
@@ -70,11 +76,6 @@ $file = "views/$action.php";
 	  	</div>
 
   	</div>
-
-    <footer>
-      <p><a href="#"></a> | <a href="#"></a> | <a href="#"></a></p>
-      
-    </footer>
 
     <script>
       (function($) {

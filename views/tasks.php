@@ -59,67 +59,15 @@ $tasks_rows = getTasksForPerson($person_id);
         mywindow.print();
     }
 
-  function new_taskG001_button(){
-	  var project_A8id = '"DlaOli"';//+$(this).attr( 'project_A8id' )+'"';
-      //  alert('task_container'+task_id);
-        $(".lastColumn_hidden").addClass( "lastColumn_visible" );
-
-        //$(".lastColumn_hidden").load("task_details.php?task_id="+task_id);
-        
-        $(".lastColumn_hidden").load("views/task_details.php?"+ $.param({project_A8id: project_A8id,task_id:-1}));
-        }
-
-
-  $( document ).ready(function() {
-      console.log( "tasks.php document ready!" );
-
-    loadTasksForFilter('person_id', person_id);
-  	    
-	});
-
-  //$(function() {
-	 // alert('accordion');
-	   // $( "#accordion" ).accordion();
-	  //});
+ 	 $( document ).ready(function() {
+  	  	  console.log( "tasks.php document ready!" );
+    	loadTasksForFilter('person_id', person_id);
   
-  $(function() {
-    // run the currently selected effect
-    function runEffect() {
-      // get effect type from
-      var selectedEffect = $( "#effectTypes" ).val();
- 
-      // most effect types need no options passed by default
-      var options = {};
-      // some effects have required parameters
-      if ( selectedEffect === "scale" ) {
-        options = { percent: 0 };
-      } else if ( selectedEffect === "transfer" ) {
-        options = { to: "#button", className: "ui-effects-transfer" };
-      } else if ( selectedEffect === "size" ) {
-        options = { to: { width: 200, height: 60 } };
-      }
- 
-      // run the effect
-      $( "#effect" ).effect( selectedEffect, options, 500, callback ).sortable();
-    };
- 
-    // callback function to bring a hidden box back
-    function callback() {
-      setTimeout(function() {
-        $( "#effect" ).removeAttr( "style" ).hide().fadeIn();
-      }, 1000 );
-    };
- 
-    // set effect from select menu value
-    $( "#button" ).click(function() {
-      runEffect();
-      return false;
-    });
-  });
+	});
 
   function refreshTasks(){
 	  loadTasksForFilter('person_id', person_id);
-	  }
+  }
 
   function loadTasksForFilter(param, value){
 	  //first apply all checkboxes
@@ -147,9 +95,6 @@ $tasks_rows = getTasksForPerson($person_id);
 				var html ='';//'<img style="vertical-align:middle" width="32px" src="img/icons/person'+person_id+'.png"/>';
 
 				html += ' <h2>Zadania  <img class="filterButton" src="img/icons/person'+person_id+'.png"/> </h2>';
-				 // <div>
-				 // Dodaj zadanie ogólne:<img title="Dodaj zadanie ogólne." width="16px" onclick="javascript:new_taskG001_button();" src="img/icons/plus-button.png"/>
-				//</div>
 				
 				var lastProjectA8Id = '0';   
 				for(var i=0;i<data.length;i++){
@@ -245,7 +190,10 @@ $(document).ajaxComplete(function() {
   	  var project_A8id = '"'+$(this).attr( 'project_A8id' )+'"';
 	  //alert('task_container'+project_A8id);
 	  $(".lastColumn_hidden").addClass( "lastColumn_visible" );
+
+	  
 	  $(".lastColumn_hidden").load("views/task_details.php?"+ $.param({project_A8id: project_A8id,task_id:-1,person_id: person_id}));
+
 		$(".middleColumn").addClass( "middleColumn_part" );
     });
 	
