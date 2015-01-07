@@ -60,9 +60,8 @@ $tasks_rows = getTasksForPerson($person_id);
     }
 
  	 $( document ).ready(function() {
-  	  	  console.log( "tasks.php document ready!" );
+  	  	console.log( "tasks.php document ready!" );
     	loadTasksForFilter('person_id', person_id);
-  
 	});
 
   function refreshTasks(){
@@ -163,14 +162,13 @@ $tasks_rows = getTasksForPerson($person_id);
 	</span>
 	  		&nbsp;&nbsp;&nbsp; dla osoby:&nbsp;&nbsp;&nbsp;
 		<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '3');person_id=3;" src="img/icons/person3.png"/>
-  		<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '4');person_id=4;" src="img/icons/person4.png"/>
   		<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '5');person_id=5;" src="img/icons/person5.png"/>
+		<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '4');person_id=4;" src="img/icons/person4.png"/>
 	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '6');person_id=6;" src="img/icons/person6.png"/>
 	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '7');person_id=7;" src="img/icons/person7.png"/>
 	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '8');person_id=8;" src="img/icons/person8.png"/>
 	  	<img class="filterButton ui-widget-content ui-corner-all"  onclick="javascript:loadTasksForFilter('person_id', '2');person_id=2;" src="img/icons/person2.png"/>
 	</div>
-
  
 <div id="accordion">
 
@@ -191,7 +189,6 @@ $(document).ajaxComplete(function() {
 	  //alert('task_container'+project_A8id);
 	  $(".lastColumn_hidden").addClass( "lastColumn_visible" );
 
-	  
 	  $(".lastColumn_hidden").load("views/task_details.php?"+ $.param({project_A8id: project_A8id,task_id:-1,person_id: person_id}));
 
 		$(".middleColumn").addClass( "middleColumn_part" );

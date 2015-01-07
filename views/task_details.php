@@ -1,15 +1,14 @@
 <?php
 require_once ('../processors/functions_tasks.php');
 
-	if (isset($_GET['task_id'])){
+	if (isset($_GET['task_id']) ? $_GET['task_id'] : -1){	
 		$row_task = getTaskDetails($_GET['task_id']);
 	}
-	else
-		$row_task = getTaskDetails(1);
 
 	function js_str($s)	{	
 		return '"' . addcslashes($s, "\0..\37\"\\") . '"';
 	}
+	
 	function js_array($array)	{
 		$temp = array_map('js_str', $array);
 		return '[' . implode(',', $temp) . ']';
@@ -34,22 +33,21 @@ echo ' $("#comments").html(html);';
 var task_id = <?php echo (isset($_GET['task_id']) ? $_GET['task_id'] : -1);?>;
 var project_A8id = <?php echo (isset($_GET['project_A8id']) ? ''.$_GET['project_A8id'] : '-1');?>;
 var person_id = <?php echo (isset($_GET['person_id']) ? ''.$_GET['person_id'] : '2');?>;
-//var project_A8id = 'A240';
 
 function add_comment(){
 	$( "#dialog-add-comment" ).dialog( "open" );
 }
 
 function close_div(){
-		//alert ('close_div close_div '+task_id);
-		 $(".lastColumn_hidden").removeClass( "lastColumn_visible" );
-		 $(".middleColumn").removeClass( "middleColumn_part" );
+	 $(".lastColumn_hidden").removeClass( "lastColumn_visible" );
+	 $(".middleColumn").removeClass( "middleColumn_part" );
 }
 
 $( document ).ready(function() {
-		$("#task").val(<?php echo('\''.mysql_real_escape_string($row_task [0] ['task']).'\'') ?> );
+		
 	if(task_id>0){
 		$("#e1").html('Szczegóły zadania o id: '+task_id);
+		$("#task").val(<?php if (isset($row_task [0] ['task'])) echo('"'.escapeDBText($row_task [0] ['task']).'"') ?> );
 	} else
 		$("#e1").html('Nowe zadanie dla projektu: '+project_A8id);
 
@@ -71,9 +69,6 @@ $( document ).ready(function() {
 	  			data_array['project_A8id'] = project_A8id;
 	  			data_array['task_id'] = task_id;
 				alert('insert_comment');
-	  			
-	  		   //var data_array = { method: 'insert_task',project_A8id: project_A8id, person_id: person_id };
-	  		   //data_array['task'] = $("#task").val();
 	 		
 	       	 	$.ajax({
 	       			type: 'post',
@@ -142,14 +137,12 @@ function change_status(status_id){
 	<img class="filterButton ui-widget-content ui-corner-all" title="Oznacz jako nieaktywne." onclick="javascript:change_status(3);" src="img/icons/set-status-inactive.png"/>
 	<br><br>
 	Treść zadania: <br><br>
-	<textarea rows="4" cols="50" id = "task" size="55" ></textarea>
+	<textarea rows="4" cols="50" id = "task"  ></textarea>
 	
 
 <br>
-	<button  onclick="javascript:save_task();" class="new_task_button"  >Zapisz</button>
-
-<button  onclick="javascript:add_comment();" class="add_comment_button"  >Dodaj komentarz</button>
-
+	<button  onclick="javascript:save_task();"  >Zapisz</button>
+	<button  onclick="javascript:add_comment();" class="add_comment_button"  >Dodaj komentarz</button>
 
 <div id='comments'>
 Komentarze:
